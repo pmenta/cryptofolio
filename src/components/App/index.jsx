@@ -41,10 +41,6 @@ function App() {
     fetchAssets();
   }, []);
 
-  useEffect(() => {
-    console.log(assets);
-  }, [assets]);
-
   return (
     <ThemeProvider theme={DefaultTheme}>
       <GlobalStyles />
@@ -59,7 +55,6 @@ function App() {
         && (
         <Modal
           editAsset={editAsset}
-          setAssets={() => setAssets()}
           handleModal={() => handleModal()}
           fetchAssets={() => fetchAssets()}
         />
@@ -78,7 +73,7 @@ function App() {
             <strong>
               $
               {' '}
-              {equityValue.toLocaleString({ currency: 'USD' })}
+              {equityValue.toLocaleString({ currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 })}
             </strong>
           </div>
           <Button type="button" onClick={() => handleModal()}>New Asset</Button>
@@ -99,7 +94,7 @@ function App() {
                 <span>
                   $
                   {' '}
-                  {asset.amount_in_usd.toLocaleString({ currency: 'USD' })}
+                  {asset.amount_in_usd.toLocaleString({ currency: 'USD', maximumFractionDigits: 1 })}
                 </span>
               </div>
             </Asset>
